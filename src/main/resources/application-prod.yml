@@ -3,37 +3,12 @@ server:
 spring:
   application:
     name: HRMS
-    
-  cloud:
-    gateway:
-      routes:
-      - id: ATTENDANCE-SERVICE
-        uri: lb://ATTENDANCE-SERVICE
-        predicates:
-        - Path=/attendance/**
-        
-      - id: EMPLOYEE-SERVICE
-        uri: lb://EMPLOYEE-SERVICE
-        predicates:
-        - Path=/employee/**
-        
-      - id: PAYROLL-SERVICE
-        uri: lb://PAYROLL-SERVICE
-        predicates:
-        - Path=/payroll/**
-    
-logging:
-  file:
-    name: G:\HRMS_API\HRMS\app.log
+  config:
+    import:
+    - configserver:http://192.168.1.60:5050
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include:
-        - '*'
-                
-eureka:
-  client:
-    service-url:
-      defaultZone: http://192.168.1.60:8761/eureka
+logging:
+  level:
+    root: INFO
+  file:
+    name: G:\HRMS_API\HRMS\app.log    
